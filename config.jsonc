@@ -1,0 +1,143 @@
+// Convict, the config library we use, supports comments in JSON.
+{
+	/* Companion relies on the concept of Instances of the various
+	 * hardware devices in your setup. It assigns short, random,
+	 * unique string IDs to each of these instances.
+	 * 
+	 * Since the entire point of our Actions is to manipulate these
+	 * Instances, we have to refer to them somehow. Writing
+	 * the ID over and over seems bad, so I made this alias map.
+	 *
+	 * IDK, it seems like an improvement, and means that an ID
+	 * change in Companion means changing this config in just one place.
+	 */
+	"instance_aliases": {
+		"H1tqYjM9X": "caspar",
+		"H1TUFofcX": "atem",
+		"SkOjFiMqm": "nodecg"
+	},
+
+	/* What Pages this program has control over.
+	 * When this program updates Companion, it will delete ALL
+	 * buttons present on these Pages, and replace them with fresh Buttons.
+	 *
+	 * TODO: Do we want to have some way of making this
+	 * program not delete Buttons that it didn't make?
+	 * Like, make the Buttons this program makes start with a ! or something?
+	 *
+	 * TODO: What happens if there's not enough room on the Pages to
+	 * make all the Buttons?
+	 */
+	"page_ranges": [
+		// Start at 4, end at 14 (both numbers are inclusive).
+		[4,14]
+
+		// We could define more ranges here if we wanted to.
+	],
+
+	/* This is the meat of this program: the acutal Button templates.
+	 * This is an array of Rules. Each Rule applies to one Folder in Caspar.
+	 */
+	"template_rules": [
+		{
+			// Defines what folder within the Caspar media Folder that this Rule applies to.
+			"folder": "PACKAGES",
+
+			// The Actions to apply to each Button created by this Rule.
+			// A new Button is made for each File in this Rule's Folder.
+			"actions": [
+				// Plays the video in Caspar.
+				{
+					"label":"caspar:PLAY",
+					"instance":"caspar",
+					"action":"PLAY",
+					"options":{
+						"channel":1,
+						"layer":"11",
+						"loop":"false",
+						"auto":"false",
+						"transition":"MIX",
+						"transition_duration":"30",
+						"transition_tween":"linear",
+
+						// A special key that tells this program
+						// to populate this with the video's filename,
+						// relative to the root of the Caspar media folder.
+						"clip":"${CLIP_NAME}"
+					},
+					"delay":"0"
+				},
+
+				// Pauses the overlay graphics, so alerts don't pop
+				// up over the video.
+				{
+					"label":"nodecg:post",
+					"instance":"nodecg",
+					"action":"post",
+					"options":{
+						"url":"http://192.168.1.11:9090/toth6-overlay/pause"
+					},
+					"delay":"0"
+				},
+
+				// Hides the BRB graphic, in case it was showing, as it
+				// would appear over the video.
+				{
+					"label":"nodecg:post",
+					"instance":"nodecg",
+					"action":"post",
+					"options":{
+						"url":"http://192.168.1.11:9090/toth6-overlay/brb/hide"
+					},
+					"delay":"0"
+				},
+
+				// Resumes the alerts, but only after a delay which
+				// corresponds to the duration of the video.
+				{
+					"label":"nodecg:post",
+					"instance":"nodecg",
+					"action":"post",
+					"options":{
+						"url":"http://192.168.1.11:9090/toth6-overlay/resume"
+					},
+
+					// A special key that tells this program
+					// to populate this with the value of the video's
+					// duration, in milliseconds.
+					//
+					// Listen, this will... get `eval`'d.
+					// That's how the arithmetic operations will work.
+					//
+					// It'll be fine. You can inject scopes into eval,
+					// this'll work. Trust me. It's fine.
+					"delay":"${CLIP_DURATION} + 1000"
+				},
+
+				/* By default, Caspar will pause on the last frame of a video indefinitely.
+				 * This is not good for us.
+				 *
+				 * This is a hack which tells Caspar to just show a blank
+				 * image after the current video has finished, which solves
+				 * the problem for us in a decent enough way.
+				 */
+				{
+					"label":"caspar:LOADBG",
+					"instance":"caspar",
+					"action":"LOADBG",
+					"options":{
+						"channel":1,
+						"layer":"11",
+						"clip":"BLANK",
+						"loop":"false",
+						"auto":"true",
+						"transition":"MIX",
+						"transition_duration":"30",
+						"transition_tween":"linear"
+					},
+					"delay":"100"
+				}
+			]
+		}
+	]
+}

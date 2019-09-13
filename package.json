@@ -1,0 +1,66 @@
+{
+  "name": "companion-caspar-configurator",
+  "version": "1.0.0",
+  "description": "A piece of bullshit that automatically creates buttons in Bitfocus Companion to play videos present in a CasparCG setup.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "lint": "npm-run-all -s lint:*",
+    "lint:prettier": "prettier --list-different \"**/*.{ts,json,md,yml,html,js}\"",
+    "lint:eslint": "eslint \"**/*.{ts,html,js}\"",
+    "build": "tsc -p tsconfig.json",
+    "fix": "npm-run-all -s fix:*",
+    "fix:prettier": "prettier --write \"**/*.{ts,json,md,yml,html,js}\"",
+    "fix:eslint": "npm run lint:eslint -- --fix ",
+    "test": "npm run lint && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TipoftheHats/companion-caspar-configurator.git"
+  },
+  "author": "Alex Van Camp <lange@tipofthehats.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TipoftheHats/companion-caspar-configurator/issues"
+  },
+  "homepage": "https://github.com/TipoftheHats/companion-caspar-configurator#readme",
+  "devDependencies": {
+    "@gamesdonequick/eslint-config": "^1.0.2",
+    "@gamesdonequick/prettier-config": "^2.0.0",
+    "@types/convict": "^4.2.1",
+    "@types/node": "^12.7.5",
+    "@types/socket.io-client": "^1.4.32",
+    "eslint": "^6.3.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.3.0",
+    "type-fest": "^0.7.1",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "casparcg-connection": "^4.7.0",
+    "convict": "^5.1.0",
+    "fast-deep-equal": "^2.0.1",
+    "socket.io-client": "^2.2.0",
+    "strict-event-emitter-types": "^2.0.0",
+    "winston": "^3.2.1",
+    "winston-transport": "^4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,json,md,yml,html,js}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,html,js}": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

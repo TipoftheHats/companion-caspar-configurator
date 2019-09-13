@@ -1,0 +1,39 @@
+// Packages
+import * as io from 'socket.io-client';
+import StrictEventEmitter from 'strict-event-emitter-types';
+
+// Ours
+import { LoadSaveData, Events } from '../types/companion';
+import { ConnectionEvents } from '../types/socket.io';
+import { conf } from './config';
+import { createLogger } from './logging';
+
+const log = createLogger('caspar');
+
+export class Companion {
+	private readonly _socket: StrictEventEmitter<SocketIOClient.Socket, Events & ConnectionEvents>;
+
+	constructor() {
+		this._socket = io(conf.get('companion_url')) as unknown;
+		this._socket.on('connect', () => {
+			log.info('Connected.');
+		});
+		this._socket.on('disconnect', () => {
+			log.info('Disconnected.');
+		});
+		this._socket.on('error', error => {
+			log.error(error);
+		});
+	}
+
+	replacePage(index: number, name: string, data: Pick<LoadSaveData, 'actions' | 'config'>): void {
+		this._socket.emit('loadsave_import_page', index, 1, {
+			...data,
+			page: {
+				1: [{ name }],
+			},
+			instances: {},
+			type: 'full',
+		});
+	}
+}

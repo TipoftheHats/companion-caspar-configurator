@@ -1,5 +1,5 @@
 {
-  "name": "companion-caspar-configurator",
+  "name": "@tipofthehats/companion-caspar-configurator",
   "version": "1.0.0",
   "description": "A piece of bullshit that automatically creates buttons in Bitfocus Companion to play videos present in a CasparCG setup.",
   "main": "src/index.ts",
@@ -65,5 +65,8 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

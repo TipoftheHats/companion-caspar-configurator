@@ -1,4 +1,10 @@
+/* A page has 12 buttons.
+ * Well, on the normal Stream Deck...
+ * I guess the Mini and XL are different.
+ * Look, its good enough for now.
+ */
 interface GenericPage<T> {
+	// These refer to the Button numbers of this Page.
 	1: T;
 	2: T;
 	3: T;
@@ -15,6 +21,7 @@ interface GenericPage<T> {
 
 // A utility type for forcing code to specify only a single Page's worth of data.
 interface SinglePage<T> {
+	// This "1" refers to the page number.
 	1: Companion.GenericPage<T>;
 }
 
@@ -91,3 +98,5 @@ export interface LoadSaveData {
 	};
 	type: 'full';
 }
+
+export const PAGE_LENGTH = 12;

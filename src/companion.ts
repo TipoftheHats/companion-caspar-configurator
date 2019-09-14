@@ -14,7 +14,10 @@ export class Companion {
 	private readonly _socket: StrictEventEmitter<SocketIOClient.Socket, Events & ConnectionEvents>;
 
 	constructor() {
-		this._socket = io(conf.get('companion_url')) as unknown;
+		// See: https://github.com/bterlson/strict-event-emitter-types/issues/12
+		// Just forcing it for now with 'any', as a workaround.
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		this._socket = io(conf.get('companion_url')) as any;
 		this._socket.on('connect', () => {
 			log.info('Connected.');
 		});

@@ -8,23 +8,23 @@ export const conf = convict({
 	companion_url: {
 		doc: 'The URL of the Bitfocus Companion instance you wish to control.',
 		format: 'url',
-		default: 'http://localhost:8000',
+		default: 'http://127.0.0.1:8000',
 	},
 	rulesets: {
 		doc: 'An array of filepaths to Rulesets to load.',
-		format: 'string',
+		format: Array,
 		default: ['./ruleset.ts'],
 	},
 	debug: {
 		doc: 'Enables extra debug logging.',
-		format: 'boolean',
+		format: Boolean,
 		default: false,
 	},
 	caspar_cg: {
 		host: {
 			doc: 'The hostname/IP of the CasparCG instance.',
 			format: 'ipaddress',
-			default: 'localhost',
+			default: '127.0.0.1',
 		},
 		port: {
 			doc: 'The port of the CasparCG instance.',

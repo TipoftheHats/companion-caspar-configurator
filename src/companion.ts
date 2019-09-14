@@ -3,21 +3,20 @@ import * as io from 'socket.io-client';
 import StrictEventEmitter from 'strict-event-emitter-types';
 
 // Ours
-import { LoadSaveData, Events } from '../types/companion';
-import { ConnectionEvents } from '../types/socket.io';
-import { conf } from './config';
+import { LoadSaveData, Events } from './types/companion';
+import { ConnectionEvents } from './types/socket.io';
 import { createLogger } from './logging';
 
-const log = createLogger('caspar');
+const log = createLogger('companion');
 
 export class Companion {
 	private readonly _socket: StrictEventEmitter<SocketIOClient.Socket, Events & ConnectionEvents>;
 
-	constructor() {
+	constructor(url: string) {
 		// See: https://github.com/bterlson/strict-event-emitter-types/issues/12
 		// Just forcing it for now with 'any', as a workaround.
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		this._socket = io(conf.get('companion_url')) as any;
+		this._socket = io(url) as any;
 		this._socket.on('connect', () => {
 			log.info('Connected.');
 		});
@@ -33,7 +32,7 @@ export class Companion {
 		this._socket.emit('loadsave_import_page', index, 1, {
 			...data,
 			page: {
-				1: [{ name }],
+				1: { name },
 			},
 			instances: {},
 			type: 'full',

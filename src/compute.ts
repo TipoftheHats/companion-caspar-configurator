@@ -2,9 +2,9 @@
 import * as shortid from 'shortid';
 
 // Ours
-import { LoadSaveData, PAGE_LENGTH } from '../types/companion';
-import { ClipMetadata, Ruleset } from '../types/Ruleset';
-import * as CompanionTypes from '../types/companion';
+import { LoadSaveData, PAGE_LENGTH } from './types/companion';
+import { ClipMetadata, Ruleset } from './types/ruleset';
+import * as CompanionTypes from './types/companion';
 
 type ReturnType = Array<{
 	name: string;
@@ -28,7 +28,7 @@ export function computePages(clips: ClipMetadata[], ruleset: Ruleset): ReturnTyp
 		const configs: CompanionTypes.ButtonConfig[] = [];
 		clips
 			.filter(clip => {
-				return clip.filename.startsWith(rule.folder);
+				return clip.filename.toLowerCase().startsWith(rule.folder.toLowerCase());
 			})
 			.forEach(clip => {
 				const actionsWithIds = rule.actions(clip).map(action => {
@@ -41,18 +41,44 @@ export function computePages(clips: ClipMetadata[], ruleset: Ruleset): ReturnTyp
 				configs.push(rule.config(clip));
 			});
 
-		const numPages = actions.length % PAGE_LENGTH;
+		const numPages = Math.ceil(actions.length / PAGE_LENGTH);
+		let currentPageNum = 0;
 		for (let i = 0; i < actions.length; i += PAGE_LENGTH) {
-			const startIndex = i * PAGE_LENGTH;
-			const endIndex = startIndex + PAGE_LENGTH + 1;
+			currentPageNum++;
 			pages.push({
-				name: `${rule.folder} - ${i + 1}/${numPages}`,
+				name: `${rule.folder} - ${currentPageNum}/${numPages}`,
 				data: {
 					actions: {
-						1: actions.slice(startIndex, endIndex),
+						1: {
+							1: actions[i],
+							2: actions[i + 1],
+							3: actions[i + 2],
+							4: actions[i + 3],
+							5: actions[i + 4],
+							6: actions[i + 5],
+							7: actions[i + 6],
+							8: actions[i + 7],
+							9: actions[i + 8],
+							10: actions[i + 9],
+							11: actions[i + 10],
+							12: actions[i + 11],
+						},
 					},
 					config: {
-						1: configs.slice(startIndex, endIndex),
+						1: {
+							1: configs[i],
+							2: configs[i + 1],
+							3: configs[i + 2],
+							4: configs[i + 3],
+							5: configs[i + 4],
+							6: configs[i + 5],
+							7: configs[i + 6],
+							8: configs[i + 7],
+							9: configs[i + 8],
+							10: configs[i + 9],
+							11: configs[i + 10],
+							12: configs[i + 11],
+						},
 					},
 				},
 			});

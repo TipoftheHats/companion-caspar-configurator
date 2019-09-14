@@ -22,7 +22,7 @@ interface GenericPage<T> {
 // A utility type for forcing code to specify only a single Page's worth of data.
 interface SinglePage<T> {
 	// This "1" refers to the page number.
-	1: Companion.GenericPage<T>;
+	1: GenericPage<T>;
 }
 
 export interface Action {
@@ -32,7 +32,7 @@ export interface Action {
 	action: string;
 	delay: string;
 	options?: {
-		[k: string]: number | string | boolean;
+		[k: string]: number | string | boolean | undefined;
 	};
 }
 
@@ -90,11 +90,13 @@ export interface Events {
 }
 
 export interface LoadSaveData {
-	actions: SinglePage<Companion.Action[]>;
-	config: SinglePage<Companion.ButtonConfig[]>;
-	page: SinglePage<{ name: string }>;
+	actions: SinglePage<Action[]>;
+	config: SinglePage<ButtonConfig>;
+	page: {
+		1: { name: string };
+	};
 	instances: {
-		[k: string]: Companion.Instance;
+		[k: string]: Instance;
 	};
 	type: 'full';
 }

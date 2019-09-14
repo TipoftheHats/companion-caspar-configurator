@@ -8,8 +8,8 @@ import StrictEventEmitter from 'strict-event-emitter-types';
 
 // Ours
 import { conf } from './config';
-import { ClipMetadata } from '../types/Ruleset';
-import * as CasparTypes from '../types/caspar_cg';
+import { ClipMetadata } from './types/ruleset';
+import * as CasparTypes from './types/caspar_cg';
 import { createLogger } from './logging';
 
 const UPDATE_FREQUENCY = 30 * 1000;
@@ -40,7 +40,9 @@ export class CasparCG extends (EventEmitter as new () => TypedEmitter) {
 				log.info('Connected.');
 				clearInterval(this._updateFilesInterval);
 				this._updateFiles();
-				this._updateFilesInterval = setInterval(this._updateFiles, UPDATE_FREQUENCY);
+				this._updateFilesInterval = setInterval(() => {
+					this._updateFiles();
+				}, UPDATE_FREQUENCY);
 			},
 			onDisconnected: () => {
 				clearInterval(this._updateFilesInterval);
@@ -76,8 +78,8 @@ export class CasparCG extends (EventEmitter as new () => TypedEmitter) {
 				const remappedMetadata = validFiles.map(f => {
 					return {
 						duration: {
-							frames: f.frames, // TODO: is this right?
-							milliseconds: f.duration, // TODO: is this right?
+							frames: f.frames,
+							milliseconds: Math.round((f.frames / f.frameRate) * 1000),
 						},
 						framerate: f.frameRate,
 						filename: f.name,

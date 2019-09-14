@@ -4,7 +4,7 @@
   "description": "A piece of bullshit that automatically creates buttons in Bitfocus Companion to play videos present in a CasparCG setup.",
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "ts-node --files --project tsconfig.json src/index.ts",
     "lint": "npm-run-all -s lint:*",
     "lint:prettier": "prettier --list-different \"**/*.{ts,json,md,yml,html,js}\"",
     "lint:eslint": "eslint \"**/*.{ts,html,js}\"",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@gamesdonequick/eslint-config": "^1.0.2",
     "@gamesdonequick/prettier-config": "^2.0.0",
+    "@supportclass/tsconfig-base": "^1.0.2",
     "@types/convict": "^4.2.1",
     "@types/node": "^12.7.5",
     "@types/shortid": "0.0.29",

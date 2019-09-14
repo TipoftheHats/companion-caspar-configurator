@@ -30,10 +30,11 @@ The following sections explain how to go about setting up this program to achiev
 
 ## Installing the program
 
-1. [Install Node.js (version 10 or later)](https://nodejs.org)
-2. [Download and extract the latest version of `companion-caspar-configurator`](https://github.com/TipoftheHats/companion-caspar-configurator/archive/master.zip)
-3. Open your terminal (or command prompt) and `cd` into the `companion-caspar-configurator` directory
-4. Run `npm i` to install its dependencies
+1. **_Back up your Companion config, as this program WILL delete pages from it._**
+2. [Install Node.js (version 10 or later)](https://nodejs.org)
+3. [Download and extract the latest version of `companion-caspar-configurator`](https://github.com/TipoftheHats/companion-caspar-configurator/archive/master.zip)
+4. Open your terminal (or command prompt) and `cd` into the `companion-caspar-configurator` directory
+5. Run `npm i` to install its dependencies
 
 ## Creating a Ruleset
 

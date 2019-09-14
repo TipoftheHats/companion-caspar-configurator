@@ -4,3 +4,4 @@ dist
 /config.json
 /ruleset.ts
 /data.json
+/logs

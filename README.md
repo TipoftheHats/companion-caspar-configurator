@@ -1,6 +1,6 @@
 # companion-caspar-configurator
 
-> A standalone program that automatically creates buttons in [Bitfocus Companion](https://bitfocus.io/companion/) to play videos present in a CasparCG setup, with support for complex dynamically-generated macros.
+> A standalone program that automatically creates buttons in [Bitfocus Companion](https://bitfocus.io/companion/) to play videos present in a [CasparCG](https://www.casparcg.com/) setup, with support for complex dynamically-generated macros.
 
 ## Table of Contents
 

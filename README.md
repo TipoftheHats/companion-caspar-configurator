@@ -206,8 +206,8 @@ If there's an error in your Ruleset, the program will immediately log an error a
 
 ## Thanks
 
-Thanks to @justinkim and @faultyserver for consulting with me (@Lange) on the Ruleset format and overall architecture of this program.
+Thanks to [@justinkim](https://github.com/justinkim) and [@faultyserver](https://github.com/faultyserver) for consulting with me ([@Lange](https://github.com/lange)) on the Ruleset format and overall architecture of this program.
 
 ## License
 
-MIT
+[MIT](LICENSE)

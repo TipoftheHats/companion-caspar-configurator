@@ -45,7 +45,8 @@ export function createLogger(label: string): winston.Logger {
 			if (typeof prop === 'function') {
 				return (...args: any[]) => {
 					args[0] = `[${label}] ${args[0]}`;
-					return (prop as unknown)(...args);
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					return (prop as any)(...args);
 				};
 			}
 

@@ -74,7 +74,11 @@
     "access": "public"
   },
   "files": [
+    "bin",
     "src",
     "tsconfig.json"
-  ]
+  ],
+  "bin": {
+    "companion-caspar-configurator": "./bin/index.js"
+  }
 }

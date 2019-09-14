@@ -17,7 +17,7 @@ First, it is important to state that this is a solution for shows with little to
 
 Video playout on a budget is hard. You're running a scrappy barebones show, and you've got ads and pre-produced video packages to play. Your setup is nothing more than a pile of computers (probably with Decklink cards) and maybe an ATEM. Playing a video requires touching multiple pieces of hardware and coordinating multiple people. It's hard and all you can think about are all the places where mistakes can easily be made.
 
-How this be improved? How do you play videos easily in a show with a small budget? What happens when things change and new videos get added mid-show? This program gives you a zero-cost workflow for addressing these problems, and it does this by gluing together two existing pieces of software: [Bitfocus Companion](https://bitfocus.io/companion/) (for the UI & controls) and [CasparCG](https://www.casparcg.com/) (for the actual video rendering and playout).
+How can this be improved? How do you play videos easily in a show with a small budget? What happens when things change and new videos get added mid-show? This program gives you a zero-cost workflow for addressing these problems, and it does this by gluing together two existing pieces of software: [Bitfocus Companion](https://bitfocus.io/companion/) (for the UI & controls) and [CasparCG](https://www.casparcg.com/) (for the actual video rendering and playout).
 
 ## Operator Workflow
 

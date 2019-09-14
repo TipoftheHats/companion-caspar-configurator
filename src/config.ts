@@ -32,10 +32,16 @@ export const conf = convict({
 			default: 5250,
 		},
 	},
+	config_path: {
+		doc: 'This is a hack that only gets used via the CLI.',
+		format: String,
+		arg: 'config',
+		default: './config.json',
+	},
 });
 
-if (fs.existsSync('./config.json') && process.env.NODE_ENV !== 'test') {
-	conf.loadFile('./config.json');
+if (fs.existsSync(conf.get('config_path')) && process.env.NODE_ENV !== 'test') {
+	conf.loadFile(conf.get('config_path'));
 }
 
 // Perform validation

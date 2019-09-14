@@ -85,7 +85,7 @@ const ruleset: Ruleset = {
 	],
 
 	/**
-	 * This is the meat of this program: the acutal Button templates.
+	 * This is the meat of this program: the actual Button templates.
 	 * This is an array of Rules. Each Rule applies to one Folder in Caspar.
 	 */
 	template_rules: [

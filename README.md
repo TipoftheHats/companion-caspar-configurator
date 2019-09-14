@@ -1,4 +1,4 @@
-# companion-caspar-configurator
+# companion-caspar-configurator [![Build Status](https://dev.azure.com/tipofthehats/companion-caspar-configurator/_apis/build/status/TipoftheHats.companion-caspar-configurator?branchName=master)](https://dev.azure.com/tipofthehats/companion-caspar-configurator/_build/latest?definitionId=2&branchName=master)
 
 > A standalone program that automatically creates buttons in [Bitfocus Companion](https://bitfocus.io/companion/) to play videos present in a [CasparCG](https://www.casparcg.com/) setup, with support for complex dynamically-generated macros.
 

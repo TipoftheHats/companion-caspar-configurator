@@ -75,7 +75,7 @@ const ruleset: Ruleset = {
 	 * fresh Buttons as computed by this Ruleset.
 	 *
 	 * If there are not enough Pages for all the Buttons that this Ruleset
-	 * wants to create, it will write as many Button as it can and log an error.
+	 * wants to create, it will write as many Buttons as it can and log an error.
 	 */
 	page_ranges: [
 		// Start at 4, end at 14 (both numbers are inclusive).
